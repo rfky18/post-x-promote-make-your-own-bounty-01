@@ -40,6 +40,11 @@ function main(): void {
     fail("POST.json harus berisi satu objek JSON");
   }
   const record = data as { url?: unknown };
+  for (const key of Object.keys(record)) {
+    if (key !== "url") {
+      fail(`field tidak dikenal di POST.json: "${key}"`);
+    }
+  }
   if (typeof record.url !== "string") {
     fail('field "url" di POST.json harus berupa string');
   }
